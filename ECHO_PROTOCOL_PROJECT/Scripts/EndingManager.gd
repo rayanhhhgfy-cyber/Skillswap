@@ -26,10 +26,16 @@ func complete_game(choice):
 			play_ending_b()
 
 func play_ending_a():
+	# HUMAN - GOOD ENDING. Rayyan the Dev credit.
+	print("Ending A: HUMAN. Developed by Rayyan the Dev.")
 	get_tree().change_scene_to_file("res://Scenes/Ending_A.tscn")
 
 func play_ending_b():
+	# INHERITANCE - BAD ENDING. Rayyan the Dev credit.
+	print("Ending B: INHERITANCE. Developed by Rayyan the Dev.")
 	get_tree().change_scene_to_file("res://Scenes/Ending_B.tscn")
 
 func play_ending_c():
+	# ECHO - TRUE ENDING. Rayyan the Dev credit.
+	print("Ending C: ECHO. Developed by Rayyan the Dev.")
 	get_tree().change_scene_to_file("res://Scenes/Ending_C.tscn")

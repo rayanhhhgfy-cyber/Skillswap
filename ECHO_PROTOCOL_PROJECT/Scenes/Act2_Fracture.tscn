@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scripts/PlayerController.gd" id="1_player"]
 [ext_resource type="Script" path="res://Scripts/MutationManager.gd" id="2_mutation"]
-[ext_resource type="Script" path="res://Scripts/Act1_Descent.gd" id="3_act1"]
+[ext_resource type="Script" path="res://Scripts/Act2_Fracture.gd" id="3_act2"]
 [ext_resource type="Script" path="res://UI/HUD.gd" id="4_hud"]
 [ext_resource type="Script" path="res://UI/DeveloperConsole.gd" id="5_console"]
 [ext_resource type="Script" path="res://Scripts/DialogueSystem.gd" id="6_dialogue"]
@@ -49,7 +49,7 @@ volumetric_fog_density = 0.05
 volumetric_fog_albedo = Color(0.1, 0.05, 0.15, 1)
 
 [node name="Game" type="Node3D"]
-script = ExtResource("3_act1")
+script = ExtResource("3_act2")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_horror")
@@ -152,7 +152,7 @@ grow_vertical = 2
 [node name="SubtitleLabel" type="Label" parent="UI/HUD/CenterContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
-text = "ACT 1: DESCENT"
+text = "ACT 2: FRACTURE"
 
 [node name="InteractionPrompt" type="Label" parent="UI/HUD"]
 visible = false
@@ -255,6 +255,8 @@ script = ExtResource("7_audio")
 [node name="SFXPlayer" type="AudioStreamPlayer" parent="Systems/AudioManager"]
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="Systems/AudioManager"]
+
+[node name="AmbientPlayer" type="AudioStreamPlayer" parent="Systems/AudioManager"]
 
 [node name="Inventory" type="Node" parent="Systems"]
 script = ExtResource("8_inventory")

@@ -1,8 +1,8 @@
 extends Node3D
 
-@export var DAMAGE = 100.0
-@export var MUTATION_COST = 4.0
-@export var COOLDOWN = 1.5
+@export var DAMAGE = 150.0 # High damage for power fantasy
+@export var MUTATION_COST = 1.5 # Lower cost so players can use it more
+@export var COOLDOWN = 0.8 # Faster cooldown
 
 var can_attack = true
 var current_cooldown = 0.0

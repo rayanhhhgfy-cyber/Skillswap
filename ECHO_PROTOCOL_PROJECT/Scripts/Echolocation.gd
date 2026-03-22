@@ -1,8 +1,8 @@
 extends Node3D
 
-@export var SONAR_RADIUS = 15.0
-@export var MUTATION_COST = 2.0
-@export var COOLDOWN = 5.0
+@export var SONAR_RADIUS = 25.0 # Wider range
+@export var MUTATION_COST = 1.0 # Negligible cost
+@export var COOLDOWN = 3.0 # More frequent use
 
 var can_use_echolocation = true
 var current_cooldown = 0.0
@@ -16,7 +16,7 @@ func _process(delta):
 		if current_cooldown <= 0:
 			can_use_echolocation = true
 
-	if player and player.velocity.length() < 0.1 and Input.is_action_just_pressed("interact"):
+	if player and player.velocity.length() < 0.1 and Input.is_action_just_pressed("use_ability"):
 		if mutation_manager and mutation_manager.has_echolocation and can_use_echolocation:
 			perform_sonar_ping()
 

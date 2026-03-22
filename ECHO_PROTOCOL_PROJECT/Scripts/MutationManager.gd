@@ -4,7 +4,7 @@ signal mutation_changed(level)
 signal ability_unlocked(ability_name)
 
 @export var mutation_level: float = 12.0
-@export var stress_rate: float = 0.01
+@export var stress_rate: float = 0.005 # Slower base rate for more control
 
 var has_bone_spikes = false
 var has_echolocation = false
@@ -15,10 +15,11 @@ var has_pheromone_dominance = true
 func _process(delta):
 	var stress_multiplier = 1.0
 	if player:
+		# Power Fantasy: Combat and high movement reward mutation, but not too fast
 		if player.is_sprinting:
-			stress_multiplier = 2.0
+			stress_multiplier = 1.5
 		elif player.is_crouching:
-			stress_multiplier = 0.5
+			stress_multiplier = 0.2 # Stealth reduces mutation buildup significantly
 
 	mutation_level += stress_rate * stress_multiplier * delta
 	mutation_level = clamp(mutation_level, 0, 100)

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scripts/PlayerController.gd" id="1_player"]
 [ext_resource type="Script" path="res://Scripts/MutationManager.gd" id="2_mutation"]
-[ext_resource type="Script" path="res://Scripts/Act1_Descent.gd" id="3_act1"]
+[ext_resource type="Script" path="res://Scripts/Act3_TheCore.gd" id="3_act3"]
 [ext_resource type="Script" path="res://UI/HUD.gd" id="4_hud"]
 [ext_resource type="Script" path="res://UI/DeveloperConsole.gd" id="5_console"]
 [ext_resource type="Script" path="res://Scripts/DialogueSystem.gd" id="6_dialogue"]
@@ -13,6 +13,7 @@
 [ext_resource type="Script" path="res://Scripts/BoneSpikes.gd" id="11_bone"]
 [ext_resource type="Script" path="res://Scripts/Echolocation.gd" id="12_echo"]
 [ext_resource type="Script" path="res://Scripts/BossMahmoud.gd" id="13_boss"]
+[ext_resource type="Script" path="res://Scripts/EndingManager.gd" id="14_ending"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_p1"]
 radius = 0.4
@@ -58,7 +59,7 @@ volumetric_fog_density = 0.05
 volumetric_fog_albedo = Color(0.1, 0.05, 0.15, 1)
 
 [node name="Game" type="Node3D"]
-script = ExtResource("3_act1")
+script = ExtResource("3_act3")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_horror")
@@ -171,7 +172,7 @@ grow_vertical = 2
 [node name="SubtitleLabel" type="Label" parent="UI/HUD/CenterContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
-text = "ACT 3: THE CORE - FINAL BOSS"
+text = "ACT 3: THE CORE"
 
 [node name="InteractionPrompt" type="Label" parent="UI/HUD"]
 visible = false
@@ -275,8 +276,13 @@ script = ExtResource("7_audio")
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="Systems/AudioManager"]
 
+[node name="AmbientPlayer" type="AudioStreamPlayer" parent="Systems/AudioManager"]
+
 [node name="Inventory" type="Node" parent="Systems"]
 script = ExtResource("8_inventory")
+
+[node name="EndingManager" type="Node" parent="Systems"]
+script = ExtResource("14_ending")
 
 [connection signal="text_submitted" from="UI/DeveloperConsole/VBoxContainer/PasswordField" to="UI/DeveloperConsole" method="_on_PasswordField_text_submitted"]
 [connection signal="value_changed" from="UI/DeveloperConsole/VBoxContainer/ConsoleContent/MutationSlider" to="UI/DeveloperConsole" method="_on_MutationSlider_value_changed"]

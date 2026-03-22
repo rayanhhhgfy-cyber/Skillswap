@@ -256,6 +256,8 @@ script = ExtResource("7_audio")
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="Systems/AudioManager"]
 
+[node name="AmbientPlayer" type="AudioStreamPlayer" parent="Systems/AudioManager"]
+
 [node name="Inventory" type="Node" parent="Systems"]
 script = ExtResource("8_inventory")
 

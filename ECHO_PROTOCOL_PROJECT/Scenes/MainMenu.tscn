@@ -38,6 +38,13 @@ theme_override_font_sizes/font_size = 64
 text = "ECHO PROTOCOL"
 horizontal_alignment = 1
 
+[node name="DeveloperLabel" type="Label" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7, 0.7, 0.7, 1)
+theme_override_font_sizes/font_size = 24
+text = "Developed by Rayyan the Dev"
+horizontal_alignment = 1
+
 [node name="StartButton" type="Button" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2
 text = "START EXPERIENCE"
@@ -53,6 +60,71 @@ text = "CREDITS"
 [node name="ExitButton" type="Button" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2
 text = "EXIT"
+
+[node name="SettingsScreen" type="ColorRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.9)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SettingsScreen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -100.0
+offset_right = 150.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 15
+
+[node name="Label" type="Label" parent="SettingsScreen/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "SETTINGS"
+horizontal_alignment = 1
+
+[node name="VisualQuality" type="HBoxContainer" parent="SettingsScreen/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="SettingsScreen/VBoxContainer/VisualQuality"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Visual Quality"
+
+[node name="QualityButton" type="OptionButton" parent="SettingsScreen/VBoxContainer/VisualQuality"]
+layout_mode = 2
+item_count = 3
+selected = 2
+popup/item_0/text = "Mobile (Low)"
+popup/item_0/id = 0
+popup/item_1/text = "Standard (Medium)"
+popup/item_1/id = 1
+popup/item_2/text = "AAA (High)"
+popup/item_2/id = 2
+
+[node name="MobileControls" type="HBoxContainer" parent="SettingsScreen/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="SettingsScreen/VBoxContainer/MobileControls"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Mobile Controls"
+
+[node name="MobileCheck" type="CheckBox" parent="SettingsScreen/VBoxContainer/MobileControls"]
+layout_mode = 2
+
+[node name="CloseSettings" type="Button" parent="SettingsScreen/VBoxContainer"]
+layout_mode = 2
+text = "CLOSE & SAVE"
 
 [node name="CreditsScreen" type="ColorRect" parent="."]
 visible = false
@@ -95,18 +167,9 @@ grow_horizontal = 2
 grow_vertical = 0
 text = "CLOSE"
 
-[node name="SettingsScreen" type="ColorRect" parent="."]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0, 0.9)
-
 [connection signal="pressed" from="CenterContainer/VBoxContainer/StartButton" to="." method="_on_StartButton_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/SettingsButton" to="." method="_on_SettingsButton_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/CreditsButton" to="." method="_on_CreditsButton_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/ExitButton" to="." method="_on_ExitButton_pressed"]
+[connection signal="pressed" from="SettingsScreen/VBoxContainer/CloseSettings" to="." method="_on_CloseSettings_pressed"]
 [connection signal="pressed" from="CreditsScreen/CloseCredits" to="CreditsScreen" method="hide"]

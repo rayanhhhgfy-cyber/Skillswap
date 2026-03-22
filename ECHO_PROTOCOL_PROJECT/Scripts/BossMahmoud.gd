@@ -7,7 +7,7 @@ var current_phase = Phase.PROFESSOR
 @export var mutation_speed = 1.0
 
 @onready var mutation_manager = get_node_or_null("../MutationManager")
-@onready var dialogue_system = get_node_or_null("Systems/DialogueSystem")
+@onready var dialogue_system = get_node_or_null("../Systems/DialogueSystem")
 
 func _ready():
 	add_to_group("boss")
@@ -34,13 +34,24 @@ func transition_to_phase_three():
 	setup_phase_three()
 
 func setup_phase_one():
-	pass
+	print("Mahmoud: Phase 1 - The Professor.")
+	health = 1000.0
+	# Strategic movement: Stay at distance and use environmental traps
+	velocity = Vector3.ZERO
 
 func setup_phase_two():
-	pass
+	print("Mahmoud: Phase 2 - The Architect.")
+	# Wall-crawling behavior: Offset vertical position to simulate being on the wall
+	position.y += 4.0
+	rotation.z = PI / 2.0 # 90-degree tilt
+	# Pheromone spike emission logic would go here
 
 func setup_phase_three():
-	pass
+	print("Mahmoud: Phase 3 - Final Form.")
+	# Transform into a stationary but massive biological engine
+	scale *= 1.5
+	position.y = 1.5 # Reset to floor
+	rotation.z = 0
 
 func handle_suppressor_injection():
 	if health <= 20 and current_phase == Phase.FINAL_FORM:

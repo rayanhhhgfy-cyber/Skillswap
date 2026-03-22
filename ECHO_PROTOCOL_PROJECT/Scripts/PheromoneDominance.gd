@@ -1,8 +1,8 @@
 extends Node3D
 
-@export var COOLDOWN = 10.0
-@export var RADIUS = 5.0
-@export var DRAIN_RATE = 2.0
+@export var COOLDOWN = 6.0 # Faster availability
+@export var RADIUS = 8.0 # Larger area
+@export var DRAIN_RATE = 1.0 # Minimal mutation cost
 
 var can_use_pheromone = true
 var current_cooldown = 0.0
@@ -16,7 +16,7 @@ func _process(delta):
 		if current_cooldown <= 0:
 			can_use_pheromone = true
 
-	if player and player.is_holding_breath and Input.is_action_just_pressed("interact"):
+	if player and player.is_holding_breath and Input.is_action_just_pressed("use_ability"):
 		if can_use_pheromone:
 			emit_signal_to_infected()
 

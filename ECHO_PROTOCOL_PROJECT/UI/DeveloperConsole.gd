@@ -2,8 +2,8 @@ extends Control
 
 @onready var password_field = $VBoxContainer/PasswordField
 @onready var console_content = $VBoxContainer/ConsoleContent
-@onready var mutation_slider = $VBoxContainer/MutationSlider
-@onready var act_selection = $VBoxContainer/ActSelection
+@onready var mutation_slider = $VBoxContainer/ConsoleContent/MutationSlider
+@onready var act_selection = $VBoxContainer/ConsoleContent/ActSelection
 
 var is_unlocked = false
 const PASSWORD = "rayyan3mk"

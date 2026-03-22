@@ -23,6 +23,11 @@ func _input(event):
 		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-80), deg_to_rad(80))
 
 func _physics_process(delta):
+	# Apply visual mutation effects to hands (Example)
+	if mutation_manager and camera:
+		var effect_level = mutation_manager.mutation_level / 100.0
+		# Update shader uniforms here if a hand model exists
+
 	# Movement logic
 	var input_dir = Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
 	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
