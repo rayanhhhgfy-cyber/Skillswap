@@ -5,6 +5,8 @@ extends CharacterBody3D
 @export var CROUCH_SPEED = 1.5
 @export var JUMP_VELOCITY = 4.5
 @export var MOUSE_SENSITIVITY = 0.05
+@export var BOB_FREQ = 2.4
+@export var BOB_AMP = 0.08
 
 @onready var camera = get_node_or_null("Camera3D")
 @onready var mutation_manager = get_node_or_null("../MutationManager")
@@ -23,6 +25,14 @@ func _input(event):
 		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-80), deg_to_rad(80))
 
 func _physics_process(delta):
+	# Camera Bobbing
+	var time = Time.get_ticks_msec() / 1000.0
+	if camera and velocity.length() > 0.1:
+		var bob = sin(time * BOB_FREQ) * BOB_AMP
+		camera.position.y = 0.6 + bob
+	elif camera:
+		camera.position.y = move_toward(camera.position.y, 0.6, delta)
+
 	# Apply visual mutation effects to hands (Example)
 	if mutation_manager and camera:
 		var effect_level = mutation_manager.mutation_level / 100.0

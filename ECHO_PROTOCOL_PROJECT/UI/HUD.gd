@@ -18,6 +18,10 @@ func _ready():
 func _on_mutation_changed(level):
 	if mutation_bar:
 		mutation_bar.value = level
+		# Diegetic effect: Hud flickers or tints red as mutation rises
+		var vignette = get_node_or_null("Vignette")
+		if vignette:
+			vignette.color.a = clamp(level / 200.0, 0.4, 0.8)
 
 func show_subtitle(text, duration):
 	if subtitle_label:
