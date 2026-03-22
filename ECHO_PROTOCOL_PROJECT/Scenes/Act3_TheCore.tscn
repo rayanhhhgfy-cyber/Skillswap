@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3]
+[gd_scene load_steps=26 format=3]
 
 [ext_resource type="Script" path="res://Scripts/PlayerController.gd" id="1_player"]
 [ext_resource type="Script" path="res://Scripts/MutationManager.gd" id="2_mutation"]
@@ -13,6 +13,7 @@
 [ext_resource type="Script" path="res://Scripts/BoneSpikes.gd" id="11_bone"]
 [ext_resource type="Script" path="res://Scripts/Echolocation.gd" id="12_echo"]
 [ext_resource type="Script" path="res://Scripts/BossMahmoud.gd" id="13_boss"]
+[ext_resource type="Script" path="res://Scripts/EndingManager.gd" id="14_ending"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_p1"]
 radius = 0.4
@@ -119,6 +120,8 @@ script = ExtResource("12_echo")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Player/EcholocationAbility/SonarDetectionArea"]
 shape = SubResource("CylinderShape_area")
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Player"]
+
 [node name="BossMahmoud" type="CharacterBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -5)
 script = ExtResource("13_boss")
@@ -187,6 +190,24 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "[E] INTERACT"
 horizontal_alignment = 1
+
+[node name="MobileControls" type="Control" parent="UI/HUD"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SonarOverlay" type="Control" parent="UI/HUD"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="ColorRect" type="ColorRect" parent="UI/HUD"]
 layout_mode = 1
@@ -257,6 +278,12 @@ script = ExtResource("7_audio")
 
 [node name="Inventory" type="Node" parent="Systems"]
 script = ExtResource("8_inventory")
+
+[node name="EndingManager" type="Node" parent="Systems"]
+script = ExtResource("14_ending")
+
+[node name="EchoTrust" type="Node" parent="Systems"]
+script = null # Replace with actual script later
 
 [connection signal="text_submitted" from="UI/DeveloperConsole/VBoxContainer/PasswordField" to="UI/DeveloperConsole" method="_on_PasswordField_text_submitted"]
 [connection signal="value_changed" from="UI/DeveloperConsole/VBoxContainer/ConsoleContent/MutationSlider" to="UI/DeveloperConsole" method="_on_MutationSlider_value_changed"]

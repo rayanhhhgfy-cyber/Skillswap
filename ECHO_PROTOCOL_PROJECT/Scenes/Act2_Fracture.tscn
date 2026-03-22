@@ -110,6 +110,8 @@ script = ExtResource("12_echo")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Player/EcholocationAbility/SonarDetectionArea"]
 shape = SubResource("CylinderShape_area")
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Player"]
+
 [node name="MutationManager" type="Node" parent="."]
 script = ExtResource("2_mutation")
 
@@ -168,6 +170,24 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "[E] INTERACT"
 horizontal_alignment = 1
+
+[node name="MobileControls" type="Control" parent="UI/HUD"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SonarOverlay" type="Control" parent="UI/HUD"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="ColorRect" type="ColorRect" parent="UI/HUD"]
 layout_mode = 1
