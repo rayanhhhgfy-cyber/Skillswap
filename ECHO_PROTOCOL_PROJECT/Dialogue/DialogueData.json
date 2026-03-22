@@ -16,15 +16,35 @@
 		"duration": 5.0
 	},
 	"log_11": {
-		"text": "Dr. Selin Aslan: Mara, if you're listening to this, I'm probably dead...",
-		"duration": 15.0
+		"text": "Dr. Selin Aslan: Mara, if you're listening to this, I'm probably dead. X-7 does NOT just infect. It integrates.",
+		"duration": 8.0
 	},
 	"yusuf_intro": {
-		"text": "Yusuf: Don't move. Don't — wait. Mara? Mara Voss?",
-		"duration": 5.0
+		"text": "Yusuf: Don't move. Don't — wait. Mara? Mara Voss? Your arm... you're infected.",
+		"duration": 6.0
 	},
 	"mahmoud_intro": {
 		"text": "Mahmoud: Mara. I'm relieved. I was beginning to think the inoculation had failed entirely.",
+		"duration": 8.0
+	},
+	"mahmoud_phase_two": {
+		"text": "Mahmoud: ...The world is... going to burn anyway. You know... that.",
+		"duration": 6.0
+	},
+	"mahmoud_phase_three": {
+		"text": "Mahmoud: ...mara... i'm... still here... i'm sorry...",
+		"duration": 6.0
+	},
+	"final_choice_ready": {
+		"text": "ECHO: Dr. Voss. Your mutation level is at eighty-one percent. The suppressor will still work if administered now.",
+		"duration": 10.0
+	},
+	"lore_tariq": {
+		"text": "Dr. Mahmoud Alifqara: There is no such thing as too far when the boy's name was Tariq and no one else was there.",
+		"duration": 10.0
+	},
+	"lore_selin_unsent": {
+		"text": "Dr. Selin Aslan: Mahmoud recruited you specifically because of the Syntex incident. Be careful.",
 		"duration": 8.0
 	}
 }

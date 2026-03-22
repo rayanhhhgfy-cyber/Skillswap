@@ -13,10 +13,12 @@ var has_pheromone_dominance = true # Basic instinct starts early
 func _process(delta):
 	# Gradually increase mutation based on stress, sprint, combat
 	var stress_multiplier = 1.0
-	if get_parent().get_node("Player").is_sprinting:
-		stress_multiplier = 2.0
-	elif get_parent().get_node("Player").is_crouching:
-		stress_multiplier = 0.5
+	var player = get_parent().get_node("Player")
+	if player:
+		if player.is_sprinting:
+			stress_multiplier = 2.0
+		elif player.is_crouching:
+			stress_multiplier = 0.5
 
 	mutation_level += stress_rate * stress_multiplier * delta
 	mutation_level = clamp(mutation_level, 0, 100)

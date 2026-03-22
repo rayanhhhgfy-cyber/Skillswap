@@ -6,12 +6,19 @@ extends Control
 @onready var credits_screen = $CreditsScreen
 @onready var settings_screen = $SettingsScreen
 
+func _ready():
+	print("Main Menu Ready.")
+	# Display credits for Rayyan
+	$CreditsScreen/CreditsLabel.text = "ECHO PROTOCOL\n\nDeveloped by\nRayyan the Dev\n\nA Survival Horror Experience"
+
 func _on_StartButton_pressed():
-	get_tree().change_scene_to_file("res://Scenes/Act1_Descent.tscn")
+	print("Starting Game...")
+	var result = get_tree().change_scene_to_file("res://Scenes/Act1_Descent.tscn")
+	if result != OK:
+		print("Error: Could not load Act1 scene. Error code: ", result)
 
 func _on_CreditsButton_pressed():
 	credits_screen.show()
-	$CreditsScreen/CreditsLabel.text = "ECHO PROTOCOL\n\nDeveloped by\nRayyan the Dev\n\nA Survival Horror Experience"
 
 func _on_SettingsButton_pressed():
 	settings_screen.show()

@@ -7,9 +7,11 @@ extends CharacterBody3D
 @export var MOUSE_SENSITIVITY = 0.05
 
 @onready var camera = $Camera3D
+# Deferred lookup for mutation_manager to avoid initialization order issues
 @onready var mutation_manager = get_node("/root/Game/MutationManager")
 
 var is_crouching = false
+var is_sprinting = false
 var is_holding_breath = false
 
 func _ready():
@@ -22,12 +24,15 @@ func _input(event):
 		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-80), deg_to_rad(80))
 
 func _physics_process(delta):
-	# Movement logic for PC/Mobile (Mobile uses virtual joysticks, which can emit Input events)
+	# Movement logic
 	var input_dir = Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
 	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 
+	is_sprinting = Input.is_action_pressed("sprint")
+	is_crouching = Input.is_action_pressed("crouch")
+
 	var current_speed = SPEED
-	if Input.is_action_pressed("sprint"):
+	if is_sprinting:
 		current_speed = SPRINT_SPEED
 	elif is_crouching:
 		current_speed = CROUCH_SPEED
@@ -39,10 +44,7 @@ func _physics_process(delta):
 		velocity.x = move_toward(velocity.x, 0, current_speed)
 		velocity.z = move_toward(velocity.z, 0, current_speed)
 
-	# Breath-holding (Stealth)
-	if Input.is_action_just_pressed("hold_breath"):
-		is_holding_breath = true
-	elif Input.is_action_just_released("hold_breath"):
-		is_holding_breath = false
+	# Breath-holding
+	is_holding_breath = Input.is_action_pressed("hold_breath")
 
 	move_and_slide()
