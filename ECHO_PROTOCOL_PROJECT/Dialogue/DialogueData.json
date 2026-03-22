@@ -1,0 +1,30 @@
+{
+	"intro_breathing": {
+		"text": "(A long, slow breath.)",
+		"duration": 3.0
+	},
+	"intro_mara_01": {
+		"text": "Mara: ...Right. Okay. Right.",
+		"duration": 2.5
+	},
+	"intro_mara_02": {
+		"text": "Mara: Expired. Very funny, Selin. Very... Selin?",
+		"duration": 4.0
+	},
+	"echo_first_contact": {
+		"text": "ECHO: Dr. Voss. You are in Sublevel Nine, Biohazard Sector C.",
+		"duration": 5.0
+	},
+	"log_11": {
+		"text": "Dr. Selin Aslan: Mara, if you're listening to this, I'm probably dead...",
+		"duration": 15.0
+	},
+	"yusuf_intro": {
+		"text": "Yusuf: Don't move. Don't — wait. Mara? Mara Voss?",
+		"duration": 5.0
+	},
+	"mahmoud_intro": {
+		"text": "Mahmoud: Mara. I'm relieved. I was beginning to think the inoculation had failed entirely.",
+		"duration": 8.0
+	}
+}
