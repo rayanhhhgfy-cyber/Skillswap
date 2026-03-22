@@ -38,5 +38,6 @@ func _on_MutationSlider_value_changed(value):
 
 func _on_ActSelection_item_selected(index):
 	if is_unlocked:
-		var act_path = "res://Scenes/Act" + str(index + 1) + ".tscn"
+		var act_names = ["Act1_Descent", "Act2_Fracture", "Act3_TheCore"]
+		var act_path = "res://Scenes/" + act_names[index] + ".tscn"
 		get_tree().change_scene_to_file(act_path)

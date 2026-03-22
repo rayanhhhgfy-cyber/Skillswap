@@ -24,4 +24,10 @@ func show_subtitle(text, duration):
 		subtitle_label.text = text
 		subtitle_label.show()
 		await get_tree().create_timer(duration).timeout
-		subtitle_label.hide()
+		if subtitle_label: subtitle_label.hide()
+
+func show_interaction_prompt(visible: bool):
+	var prompt = get_node_or_null("InteractionPrompt")
+	if prompt:
+		if visible: prompt.show()
+		else: prompt.hide()

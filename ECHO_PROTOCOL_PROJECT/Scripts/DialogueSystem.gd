@@ -35,4 +35,4 @@ func play_dialogue(id):
 		print("Warning: Dialogue ID '", id, "' not found.")
 
 func play_voice_log(log_id):
-	play_dialogue("log_" + log_id)
+	play_dialogue(log_id)
