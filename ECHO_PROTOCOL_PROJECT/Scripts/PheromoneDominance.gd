@@ -7,9 +7,8 @@ extends Node3D
 var can_use_pheromone = true
 var current_cooldown = 0.0
 
-# Use absolute paths or deferred lookups for robustness
-@onready var player = get_node("/root/Game/Player")
-@onready var mutation_manager = get_node("/root/Game/MutationManager")
+@onready var player = get_parent()
+@onready var mutation_manager = get_node_or_null("../../MutationManager")
 
 func _process(delta):
 	if not can_use_pheromone:
@@ -22,18 +21,17 @@ func _process(delta):
 			emit_signal_to_infected()
 
 func emit_signal_to_infected():
-	var effective_radius = RADIUS * (1.0 + (mutation_manager.mutation_level / 100.0))
-	var detection_area = get_node_or_null("DetectionArea")
-	if detection_area:
-		var bodies = detection_area.get_overlapping_bodies()
-		for body in bodies:
-			if body.is_in_group("infected"):
-				if body.has_method("freeze_in_place"):
-					body.freeze_in_place(effective_radius)
-
-	can_use_pheromone = false
-	current_cooldown = COOLDOWN
-
 	if mutation_manager:
+		var effective_radius = RADIUS * (1.0 + (mutation_manager.mutation_level / 100.0))
+		var detection_area = get_node_or_null("DetectionArea")
+		if detection_area:
+			var bodies = detection_area.get_overlapping_bodies()
+			for body in bodies:
+				if body.is_in_group("infected"):
+					if body.has_method("freeze_in_place"):
+						body.freeze_in_place(effective_radius)
+
+		can_use_pheromone = false
+		current_cooldown = COOLDOWN
 		mutation_manager.mutation_level += DRAIN_RATE
 		mutation_manager.emit_signal("mutation_changed", mutation_manager.mutation_level)

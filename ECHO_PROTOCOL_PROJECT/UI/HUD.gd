@@ -1,16 +1,14 @@
 extends Control
 
-@onready var mutation_bar = $VBoxContainer/MutationBar
-@onready var subtitle_label = $CenterContainer/SubtitleLabel
+@onready var mutation_bar = get_node_or_null("VBoxContainer/MutationBar")
+@onready var subtitle_label = get_node_or_null("CenterContainer/SubtitleLabel")
 @onready var mobile_controls = get_node_or_null("MobileControls")
 
 func _ready():
-	# Connect to MutationManager signals
-	var mutation_manager = get_node_or_null("/root/Game/MutationManager")
+	var mutation_manager = get_node_or_null("../../MutationManager")
 	if mutation_manager:
 		mutation_manager.connect("mutation_changed", _on_mutation_changed)
 
-	# Detect mobile to show/hide virtual controls
 	if mobile_controls:
 		if OS.get_name() in ["Android", "iOS"]:
 			mobile_controls.show()

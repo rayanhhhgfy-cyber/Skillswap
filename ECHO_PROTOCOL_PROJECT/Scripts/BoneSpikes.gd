@@ -7,8 +7,8 @@ extends Node3D
 var can_attack = true
 var current_cooldown = 0.0
 
-@onready var mutation_manager = get_node("/root/Game/MutationManager")
-@onready var animation_player = get_node_or_null("../AnimationPlayer")
+@onready var mutation_manager = get_node_or_null("../../MutationManager")
+@onready var animation_player = get_parent().get_node_or_null("AnimationPlayer")
 
 func _process(delta):
 	if not can_attack:

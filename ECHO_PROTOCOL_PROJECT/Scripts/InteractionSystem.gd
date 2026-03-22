@@ -1,8 +1,8 @@
 extends RayCast3D
 
-@onready var prompt_label = get_node("/root/Game/UI/HUD/InteractionPrompt")
-@onready var inventory = get_node("/root/Game/Systems/Inventory")
-@onready var dialogue_system = get_node("/root/Game/Systems/DialogueSystem")
+@onready var prompt_label = get_node_or_null("../../UI/HUD/InteractionPrompt")
+@onready var inventory = get_node_or_null("../../Systems/Inventory")
+@onready var dialogue_system = get_node_or_null("../../Systems/DialogueSystem")
 
 func _process(delta):
 	if is_colliding():

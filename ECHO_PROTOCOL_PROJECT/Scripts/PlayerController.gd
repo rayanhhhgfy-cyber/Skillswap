@@ -6,9 +6,8 @@ extends CharacterBody3D
 @export var JUMP_VELOCITY = 4.5
 @export var MOUSE_SENSITIVITY = 0.05
 
-@onready var camera = $Camera3D
-# Deferred lookup for mutation_manager to avoid initialization order issues
-@onready var mutation_manager = get_node("/root/Game/MutationManager")
+@onready var camera = get_node_or_null("Camera3D")
+@onready var mutation_manager = get_node_or_null("../MutationManager")
 
 var is_crouching = false
 var is_sprinting = false
@@ -18,7 +17,7 @@ func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 func _input(event):
-	if event is InputEventMouseMotion:
+	if event is InputEventMouseMotion and camera:
 		rotate_y(deg_to_rad(-event.relative.x * MOUSE_SENSITIVITY))
 		camera.rotate_x(deg_to_rad(-event.relative.y * MOUSE_SENSITIVITY))
 		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-80), deg_to_rad(80))

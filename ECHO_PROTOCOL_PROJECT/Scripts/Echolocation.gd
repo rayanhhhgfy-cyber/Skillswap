@@ -7,9 +7,8 @@ extends Node3D
 var can_use_echolocation = true
 var current_cooldown = 0.0
 
-@onready var player = get_node("/root/Game/Player")
-@onready var mutation_manager = get_node("/root/Game/MutationManager")
-@onready var sonar_visuals = get_node_or_null("/root/Game/UI/HUD/SonarOverlay")
+@onready var player = get_parent()
+@onready var mutation_manager = get_node_or_null("../../MutationManager")
 
 func _process(delta):
 	if not can_use_echolocation:
@@ -22,6 +21,7 @@ func _process(delta):
 			perform_sonar_ping()
 
 func perform_sonar_ping():
+	var sonar_visuals = get_node_or_null("../../UI/HUD/SonarOverlay")
 	if sonar_visuals and sonar_visuals.has_method("activate_ping"):
 		sonar_visuals.activate_ping(SONAR_RADIUS)
 
