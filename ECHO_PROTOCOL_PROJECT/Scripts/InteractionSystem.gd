@@ -5,7 +5,7 @@ extends RayCast3D
 @onready var inventory = get_node_or_null("../../../Systems/Inventory")
 @onready var dialogue_system = get_node_or_null("../../../Systems/DialogueSystem")
 
-func _process(delta):
+func _process(_delta):
 	if is_colliding():
 		var obj = get_collider()
 		if obj and obj.is_in_group("interactable"):

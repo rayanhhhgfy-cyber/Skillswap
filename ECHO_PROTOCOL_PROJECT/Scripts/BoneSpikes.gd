@@ -21,8 +21,12 @@ func _process(delta):
 			perform_bone_spikes_attack()
 
 func perform_bone_spikes_attack():
-	if animation_player:
-		animation_player.play("bone_spikes_attack")
+	# Procedural "Strike" effect instead of missing animation
+	if get_parent() and get_parent().get_node_or_null("Camera3D"):
+		var cam = get_parent().get_node("Camera3D")
+		var tween = create_tween()
+		tween.tween_property(cam, "position:z", -0.2, 0.1).as_relative()
+		tween.tween_property(cam, "position:z", 0.2, 0.1).as_relative()
 
 	var attack_area = get_node_or_null("AttackArea")
 	if attack_area:

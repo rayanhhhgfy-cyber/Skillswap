@@ -1,29 +1,40 @@
-extends Node
+extends AudioStreamPlayer
 
-@onready var music_player = $MusicPlayer
-@onready var sfx_player = $SFXPlayer
-@onready var ambient_player = $AmbientPlayer
+# Procedural ECHO "voice" generator using basic synthesis
+# Combined with specific pitch shifting and distortion to sound "genderless, clinical"
 
-var current_tension = 0.0 # 0.0 (Safe) to 1.0 (Boss Fight)
+@export var base_pitch = 1.0
+@export var pitch_variation = 0.05
+@export var effect_intensity = 0.4
 
-func _process(delta):
-	# Gradually adjust music based on player tension
-	update_tension_music()
+func play_voice(text):
+	# Synthesize sounds based on character count (placeholder for more advanced TTS)
+	var words = text.split(" ")
+	for word in words:
+		var stream_gen = AudioStreamGenerator.new()
+		# Logic to fill the generator with a neutral, sine-based voice tone
+		# For now, use a pitch-shifted beep-tone as a placeholder
+		# but layer it with static
+		play_word_sound(word.length() * 0.1)
 
-func update_tension_music():
-	var volume_safe = 1.0 - current_tension
-	var volume_intense = current_tension
+func play_word_sound(duration):
+	pitch_scale = base_pitch + randf_range(-pitch_variation, pitch_variation)
+	# In a real Godot project, we'd use an AudioStreamWAV or OGG
+	# and apply an AudioEffectDistortion and AudioEffectPitchShift via the bus
+	print("ECHO synthesized a sound of duration: ", duration)
 
-	# Cross-fade between safe and intense audio streams
-	# Logic to set volume levels for different players
-	pass
+func set_echo_bus_effects():
+	# Configure the AudioBus for ECHO
+	var bus_index = AudioServer.get_bus_index("ECHO_Voice")
+	if bus_index == -1: return
 
-func play_sfx(id):
-	var stream = load("res://Audio/SFX/" + id + ".wav")
-	sfx_player.stream = stream
-	sfx_player.play()
+	var distortion = AudioEffectDistortion.new()
+	distortion.mode = AudioEffectDistortion.MODE_SOFTCLIP
+	distortion.drive = 0.3
+	AudioServer.add_bus_effect(bus_index, distortion)
 
-func trigger_dynamic_horror():
-	# Creaking vents, distant screams logic
-	if randf() > 0.98:
-		play_sfx("vent_move")
+	var chorus = AudioEffectChorus.new()
+	chorus.voice_count = 2
+	chorus.voice_1/delay_ms = 10.0
+	chorus.voice_2/delay_ms = 15.0
+	AudioServer.add_bus_effect(bus_index, chorus)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3]
+[gd_scene load_steps=24 format=3]
 
 [ext_resource type="Script" path="res://Scripts/PlayerController.gd" id="1_player"]
 [ext_resource type="Script" path="res://Scripts/MutationManager.gd" id="2_mutation"]
@@ -14,6 +14,8 @@
 [ext_resource type="Script" path="res://Scripts/Echolocation.gd" id="12_echo"]
 [ext_resource type="Script" path="res://Scripts/InfectedAI.gd" id="13_infected"]
 [ext_resource type="Script" path="res://Scripts/LoreLog.gd" id="14_lore"]
+[ext_resource type="Script" path="res://UI/PauseMenu.gd" id="15_pause"]
+[ext_resource type="Script" path="res://Scripts/PropFlicker.gd" id="16_flicker"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_p1"]
 radius = 0.4
@@ -108,13 +110,56 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 
 shape = SubResource("BoxShape_floor")
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
 
+[node name="Wall3" type="StaticBody3D" parent="Environment"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -10, 2, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Environment/Wall3"]
+mesh = SubResource("BoxMesh_floor")
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/Wall3"]
+shape = SubResource("BoxShape_floor")
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+
+[node name="Wall4" type="StaticBody3D" parent="Environment"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 10, 2, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Environment/Wall4"]
+mesh = SubResource("BoxMesh_floor")
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/Wall4"]
+shape = SubResource("BoxShape_floor")
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+
 [node name="EmergencyLight" type="OmniLight3D" parent="Environment"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -4)
+script = ExtResource("16_flicker")
 light_color = Color(1, 0, 0, 1)
 light_energy = 1.5
 omni_range = 8.0
 omni_attenuation = 2.0
 shadow_enabled = true
+
+[node name="LabLight1" type="SpotLight3D" parent="Environment"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 4, 4, -4)
+light_energy = 2.0
+spot_range = 10.0
+spot_angle = 35.0
+shadow_enabled = true
+
+[node name="LabLight2" type="SpotLight3D" parent="Environment"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -4, 4, -4)
+light_energy = 2.0
+spot_range = 10.0
+spot_angle = 35.0
+shadow_enabled = true
+
+[node name="HallwayLight" type="OmniLight3D" parent="Environment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 5)
+light_color = Color(0.8, 0.9, 1, 1)
+light_energy = 0.8
+omni_range = 12.0
 
 [node name="LoreLog1" type="StaticBody3D" parent="Environment" groups=["interactable", "lore_log"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.5, -3)
@@ -248,18 +293,22 @@ custom_minimum_size = Vector2(400, 20)
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="CenterContainer" type="CenterContainer" parent="UI/HUD"]
+[node name="SubtitleContainer" type="MarginContainer" parent="UI/HUD"]
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = 12
+anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = -150.0
+offset_bottom = -100.0
 grow_horizontal = 2
-grow_vertical = 2
+grow_vertical = 0
 
-[node name="SubtitleLabel" type="Label" parent="UI/HUD/CenterContainer"]
+[node name="SubtitleLabel" type="Label" parent="UI/HUD/SubtitleContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "ACT 1: DESCENT"
+horizontal_alignment = 1
 
 [node name="InteractionPrompt" type="Label" parent="UI/HUD"]
 visible = false
@@ -304,6 +353,109 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(1, 1, 1, 0.02)
+
+[node name="SettingsScreen" type="ColorRect" parent="UI"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.9)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/SettingsScreen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -100.0
+offset_right = 150.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 15
+
+[node name="Label" type="Label" parent="UI/SettingsScreen/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "SETTINGS"
+horizontal_alignment = 1
+
+[node name="FOVSlider" type="HBoxContainer" parent="UI/SettingsScreen/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="UI/SettingsScreen/VBoxContainer/FOVSlider"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "FOV"
+
+[node name="Slider" type="HSlider" parent="UI/SettingsScreen/VBoxContainer/FOVSlider"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+min_value = 60.0
+max_value = 110.0
+value = 75.0
+
+[node name="CloseSettings" type="Button" parent="UI/SettingsScreen/VBoxContainer"]
+layout_mode = 2
+text = "BACK"
+
+[node name="PauseMenu" type="Control" parent="UI"]
+process_mode = 2
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("15_pause")
+
+[node name="ColorRect" type="ColorRect" parent="UI/PauseMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.7)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/PauseMenu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -100.0
+offset_right = 100.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 15
+
+[node name="Title" type="Label" parent="UI/PauseMenu/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "PAUSED"
+horizontal_alignment = 1
+
+[node name="ResumeButton" type="Button" parent="UI/PauseMenu/VBoxContainer"]
+layout_mode = 2
+text = "RESUME"
+
+[node name="SettingsButton" type="Button" parent="UI/PauseMenu/VBoxContainer"]
+layout_mode = 2
+text = "SETTINGS"
+
+[node name="QuitButton" type="Button" parent="UI/PauseMenu/VBoxContainer"]
+layout_mode = 2
+text = "QUIT TO MENU"
 
 [node name="DeveloperConsole" type="Control" parent="UI"]
 visible = false
@@ -390,6 +542,10 @@ mesh = SubResource("CapsuleMesh_p1")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Enemies/Infected2"]
 shape = SubResource("CapsuleShape_p1")
 
+[connection signal="pressed" from="UI/PauseMenu/VBoxContainer/ResumeButton" to="UI/PauseMenu" method="_on_ResumeButton_pressed"]
+[connection signal="pressed" from="UI/PauseMenu/VBoxContainer/SettingsButton" to="UI/PauseMenu" method="_on_SettingsButton_pressed"]
+[connection signal="pressed" from="UI/PauseMenu/VBoxContainer/QuitButton" to="UI/PauseMenu" method="_on_QuitButton_pressed"]
+[connection signal="pressed" from="UI/SettingsScreen/VBoxContainer/CloseSettings" to="UI/SettingsScreen" method="hide"]
 [connection signal="text_submitted" from="UI/DeveloperConsole/VBoxContainer/PasswordField" to="UI/DeveloperConsole" method="_on_PasswordField_text_submitted"]
 [connection signal="value_changed" from="UI/DeveloperConsole/VBoxContainer/ConsoleContent/MutationSlider" to="UI/DeveloperConsole" method="_on_MutationSlider_value_changed"]
 [connection signal="item_selected" from="UI/DeveloperConsole/VBoxContainer/ConsoleContent/ActSelection" to="UI/DeveloperConsole" method="_on_ActSelection_item_selected"]

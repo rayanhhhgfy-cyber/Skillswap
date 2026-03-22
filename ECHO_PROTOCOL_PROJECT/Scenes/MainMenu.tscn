@@ -111,6 +111,53 @@ popup/item_1/id = 1
 popup/item_2/text = "AAA (High)"
 popup/item_2/id = 2
 
+[node name="FOVSlider" type="HBoxContainer" parent="SettingsScreen/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="SettingsScreen/VBoxContainer/FOVSlider"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "FOV"
+
+[node name="Slider" type="HSlider" parent="SettingsScreen/VBoxContainer/FOVSlider"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+min_value = 60.0
+max_value = 110.0
+value = 75.0
+
+[node name="Sensitivity" type="HBoxContainer" parent="SettingsScreen/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="SettingsScreen/VBoxContainer/Sensitivity"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Mouse Sensitivity"
+
+[node name="Slider" type="HSlider" parent="SettingsScreen/VBoxContainer/Sensitivity"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+min_value = 0.01
+max_value = 0.5
+step = 0.01
+value = 0.1
+
+[node name="AudioVolume" type="HBoxContainer" parent="SettingsScreen/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="SettingsScreen/VBoxContainer/AudioVolume"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Master Volume"
+
+[node name="Slider" type="HSlider" parent="SettingsScreen/VBoxContainer/AudioVolume"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+min_value = 0.0
+max_value = 1.0
+step = 0.05
+value = 0.8
+
 [node name="MobileControls" type="HBoxContainer" parent="SettingsScreen/VBoxContainer"]
 layout_mode = 2
 

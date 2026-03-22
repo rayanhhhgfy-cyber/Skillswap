@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3]
+[gd_scene load_steps=22 format=3]
 
 [ext_resource type="Script" path="res://Scripts/PlayerController.gd" id="1_player"]
 [ext_resource type="Script" path="res://Scripts/MutationManager.gd" id="2_mutation"]
@@ -37,26 +37,32 @@ height = 3.0
 radius = 1.0
 height = 3.0
 
-[sub_resource type="CylinderShape3D" id="CylinderShape_area"]
-radius = 5.0
-height = 2.0
-
-[sub_resource type="BoxShape3D" id="BoxShape_attack"]
-size = Vector3(2, 1, 2)
-
 [sub_resource type="Environment" id="Environment_horror"]
 background_mode = 1
-background_color = Color(0.01, 0.01, 0.01, 1)
+background_color = Color(0.005, 0.005, 0.01, 1)
 ambient_light_source = 2
-ambient_light_color = Color(0.05, 0.05, 0.05, 1)
-tonemap_mode = 2
+ambient_light_color = Color(0.02, 0.02, 0.03, 1)
+tonemap_mode = 3
+tonemap_exposure = 1.2
+tonemap_white = 6.0
 ssr_enabled = true
 ssao_enabled = true
+ssao_radius = 1.5
+ssao_intensity = 2.0
+ssao_power = 0.5
 ssil_enabled = true
 sdfgi_enabled = true
+sdfgi_use_occlusion = true
+glow_enabled = true
+glow_intensity = 0.8
+glow_strength = 1.2
+glow_bloom = 0.1
+glow_blend_mode = 1
 volumetric_fog_enabled = true
-volumetric_fog_density = 0.05
-volumetric_fog_albedo = Color(0.1, 0.05, 0.15, 1)
+volumetric_fog_density = 0.12
+volumetric_fog_albedo = Color(0.08, 0.08, 0.12, 1)
+volumetric_fog_emission = Color(0.02, 0.01, 0.03, 1)
+volumetric_fog_length = 64.0
 
 [node name="Game" type="Node3D"]
 script = ExtResource("3_act3")
@@ -66,9 +72,10 @@ environment = SubResource("Environment_horror")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -0.5, 0.866, 0, -0.866, -0.5, 0, 10, 0)
-light_color = Color(1, 0.2, 0.2, 1)
-light_energy = 1.0
+light_color = Color(0.1, 0.1, 0.15, 1)
+light_energy = 0.2
 shadow_enabled = true
+shadow_blur = 1.5
 
 [node name="Floor" type="StaticBody3D" parent="."]
 
@@ -161,18 +168,22 @@ custom_minimum_size = Vector2(400, 20)
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="CenterContainer" type="CenterContainer" parent="UI/HUD"]
+[node name="SubtitleContainer" type="MarginContainer" parent="UI/HUD"]
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = 12
+anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = -150.0
+offset_bottom = -100.0
 grow_horizontal = 2
-grow_vertical = 2
+grow_vertical = 0
 
-[node name="SubtitleLabel" type="Label" parent="UI/HUD/CenterContainer"]
+[node name="SubtitleLabel" type="Label" parent="UI/HUD/SubtitleContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "ACT 3: THE CORE"
+horizontal_alignment = 1
 
 [node name="InteractionPrompt" type="Label" parent="UI/HUD"]
 visible = false
@@ -209,14 +220,23 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ColorRect" type="ColorRect" parent="UI/HUD"]
+[node name="Vignette" type="ColorRect" parent="UI/HUD"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(1, 0, 0, 0.1)
+color = Color(0, 0, 0, 0.4)
+
+[node name="Grain" type="ColorRect" parent="UI/HUD"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0.02)
 
 [node name="DeveloperConsole" type="Control" parent="UI"]
 visible = false
