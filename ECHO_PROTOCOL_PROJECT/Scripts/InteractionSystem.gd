@@ -1,13 +1,14 @@
 extends RayCast3D
 
-@onready var prompt_label = get_node_or_null("../../UI/HUD/InteractionPrompt")
-@onready var inventory = get_node_or_null("../../Systems/Inventory")
-@onready var dialogue_system = get_node_or_null("../../Systems/DialogueSystem")
+# Robust relative path: InteractionRayCast -> Camera3D -> Player -> Game -> UI/HUD/InteractionPrompt
+@onready var prompt_label = get_node_or_null("../../../UI/HUD/InteractionPrompt")
+@onready var inventory = get_node_or_null("../../../Systems/Inventory")
+@onready var dialogue_system = get_node_or_null("../../../Systems/DialogueSystem")
 
 func _process(delta):
 	if is_colliding():
 		var obj = get_collider()
-		if obj.is_in_group("interactable"):
+		if obj and obj.is_in_group("interactable"):
 			if prompt_label:
 				prompt_label.text = "[E] " + (obj.interaction_text if "interaction_text" in obj else "Interact")
 				prompt_label.show()
